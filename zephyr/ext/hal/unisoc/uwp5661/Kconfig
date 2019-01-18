@@ -1,0 +1,48 @@
+config HAS_UWP
+	bool "Enable uwp hal library"
+	help
+	  Enable UNISOC uwp5 hal libraries with register definitions
+	  and helper functions.
+
+module = UWP_HAL
+module-dep = LOG
+module-str = Log level for UWP HAL
+module-help = Sets log level for UWP HAL.
+source "subsys/logging/Kconfig.template.log_config"
+
+if HAS_UWP
+
+config USE_UWP_HAL_CACHE
+	bool
+	default y
+	help
+	  Provide interfaces to enable or disable icache/dcache in
+	  CM4.
+
+config USE_UWP_HAL_GNSS
+	bool
+	default y
+	help
+	  Provide interfaces to initial cp2.
+	  
+config USE_UWP_HAL_FW
+	bool
+	default y
+	help
+	  Provide interfaces to download firmware for another CM4.
+
+config USE_UWP_HAL_SFC
+	bool
+	default y
+	help
+	  Provide interfaces to operate SFC.
+
+config USE_UWP_HAL_SRAM
+	bool
+	default y
+	help
+	  Provide interfaces to initialize SRAM.
+
+source "ext/hal/unisoc/uwp5661/drivers/src/sipc/Kconfig"
+source "ext/hal/unisoc/uwp5661/drivers/src/bt/Kconfig"
+endif
